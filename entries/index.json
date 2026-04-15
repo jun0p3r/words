@@ -1,16 +1,16 @@
 [
   {
-    "title": "First Light",
-    "date": "2026-04-14",
-    "summary": "A first note for the new blog.",
-    "file": "entries/2026-04-14-first-light.md",
-    "tags": ["journal", "photo"]
+    "title": "America",
+    "date": "2026-03-02",
+    "summary": "The idea of America is beautiful.",
+    "file": "entries/2026-03-02-America.md",
+    "tags": ["essay"]
   },
   {
-    "title": "Keeping Small Notes",
-    "date": "2026-04-10",
-    "summary": "A quick example of headings, links, and lists.",
-    "file": "entries/2026-04-10-keeping-small-notes.md",
-    "tags": ["notes"]
+    "title": "Hope",
+    "date": "2026-02-26",
+    "summary": "Only hope can inspire.",
+    "file": "entries/2026-02-26-Hope.md",
+    "tags": ["essay"]
   }
 ]
