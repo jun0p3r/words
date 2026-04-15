@@ -20,11 +20,32 @@ http://localhost:8000
 
 ## Add an entry
 
-1. Create a new `.md` file in `entries/`.
-2. Add it to `entries/index.json`.
-3. Give it a `date` in `YYYY-MM-DD` format.
+Create a new `.md` file in `entries/` with the date at the start of the
+filename:
 
-The page sorts entries by date, newest first, every time it loads.
+```text
+entries/YYYY-MM-DD-title.md
+```
+
+Examples:
+
+```text
+entries/2026-03-02-America.md
+entries/2026-02-26-Hope.md
+```
+
+The title comes from the first `# Heading` in the file. If there is no heading,
+the title comes from the filename.
+
+The page sorts entries by date, newest first, every time it loads. Locally,
+regenerate the entry list after adding or renaming Markdown files:
+
+```powershell
+python scripts/generate_entry_index.py
+```
+
+On GitHub Pages, the deploy workflow runs that command automatically on every
+push to `main`.
 
 Markdown images work with local paths or remote URLs:
 
@@ -35,14 +56,13 @@ Markdown images work with local paths or remote URLs:
 
 ## Publish on GitHub Pages
 
-This project can be hosted from GitHub Pages with no build step.
+This project can be hosted from GitHub Pages with the included deploy workflow.
 
 1. Push the repo to GitHub.
 2. Open the repo on GitHub.
 3. Go to **Settings** -> **Pages**.
-4. Set **Source** to **Deploy from a branch**.
-5. Choose the `main` branch and the repo root folder.
-6. Save.
+4. Set **Source** to **GitHub Actions**.
+5. Save.
 
 The `.nojekyll` file keeps GitHub Pages from processing the Markdown entries,
 so the browser can load the raw `.md` files.

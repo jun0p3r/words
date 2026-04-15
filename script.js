@@ -1,5 +1,6 @@
 const entryList = document.querySelector("#latest");
 const menuList = document.querySelector("#entry-menu-list");
+const contentPane = document.querySelector(".content-pane");
 
 loadEntries();
 
@@ -20,6 +21,7 @@ async function loadEntries() {
 
     const renderedEntries = await Promise.all(sortedEntries.map(renderEntry));
     entryList.innerHTML = renderedEntries.join("");
+    setupActiveTimeline();
   } catch (error) {
     const message = `
       <div class="error">
@@ -41,16 +43,86 @@ function renderMenu(entries) {
   }
 
   menuList.innerHTML = entries
-    .map((entry) => {
+    .map((entry, index) => {
       const id = entryId(entry);
       return `
-        <a href="#${id}">
+        <a class="${index === 0 ? "is-active" : ""}" href="#${id}" data-entry-link="${id}">
           <span>${escapeHtml(entry.title)}</span>
           <time datetime="${escapeAttribute(entry.date)}">${formatDate(entry.date)}</time>
         </a>
       `;
     })
     .join("");
+}
+
+function setupActiveTimeline() {
+  const entries = Array.from(document.querySelectorAll(".entry"));
+  const links = Array.from(menuList.querySelectorAll("[data-entry-link]"));
+
+  if (!entries.length || !links.length || !contentPane) {
+    return;
+  }
+
+  const linkById = new Map(links.map((link) => [link.dataset.entryLink, link]));
+  let activeId = "";
+  let ticking = false;
+
+  const setActive = (id, keepVisible = true) => {
+    if (!id || id === activeId) {
+      return;
+    }
+
+    activeId = id;
+
+    links.forEach((link) => {
+      link.classList.toggle("is-active", link.dataset.entryLink === id);
+    });
+
+    if (keepVisible) {
+      linkById.get(id)?.scrollIntoView({ block: "nearest" });
+    }
+  };
+
+  const updateActiveFromScroll = () => {
+    const paneRect = contentPane.getBoundingClientRect();
+    const targetY = paneRect.top + paneRect.height * 0.34;
+    let closestEntry = entries[0];
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    entries.forEach((entry) => {
+      const rect = entry.getBoundingClientRect();
+      const distance = Math.abs(rect.top - targetY);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestEntry = entry;
+      }
+    });
+
+    setActive(closestEntry.id);
+  };
+
+  const requestUpdate = () => {
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      updateActiveFromScroll();
+    });
+  };
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      setActive(link.dataset.entryLink, false);
+    });
+  });
+
+  contentPane.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  updateActiveFromScroll();
 }
 
 async function renderEntry(entry) {

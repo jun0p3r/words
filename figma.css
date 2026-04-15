@@ -152,11 +152,11 @@ img {
   transform: translateY(-50%);
 }
 
-.timeline a:first-child {
+.timeline a.is-active {
   color: var(--text);
 }
 
-.timeline a:first-child::before {
+.timeline a.is-active::before {
   opacity: 1;
 }
 
@@ -177,12 +177,12 @@ img {
   font-weight: 300;
 }
 
-.timeline a:first-child span {
+.timeline a.is-active span {
   font-size: var(--entry-title-size);
   font-weight: 600;
 }
 
-.timeline a:first-child time {
+.timeline a.is-active time {
   font-size: var(--entry-date-size);
   font-weight: 600;
 }
