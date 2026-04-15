@@ -7,34 +7,28 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#top" aria-label="Words from Franco home">Words</a>
-      <nav class="topnav" aria-label="Primary navigation">
-        <a href="#latest">Latest</a>
-        <a href="#menu">Menu</a>
-      </nav>
-    </header>
+    <div class="site-shell">
+      <aside id="menu" class="sidebar" aria-labelledby="site-title">
+        <div class="sidebar-heading">
+          <a class="site-name" href="#latest" aria-label="Words from Franco home">Words</a>
+          <h1 id="site-title">Words from Franco</h1>
+          <p>Notes, images, and stray sparks.</p>
+        </div>
 
-    <main id="top" class="page">
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">Words from Franco</p>
-        <h1 id="page-title">Notes, images, and stray sparks.</h1>
-        <p>Newest writing stays at the top. Everything else waits its turn.</p>
-      </section>
-
-      <div class="blog-layout">
-        <aside id="menu" class="entry-menu" aria-labelledby="menu-title">
-          <h2 id="menu-title">Menu</h2>
-          <nav id="entry-menu-list" aria-label="Entry menu">
+        <div class="timeline-wrap">
+          <h2>Timeline</h2>
+          <nav id="entry-menu-list" class="timeline" aria-label="Entry timeline">
             <p class="muted">Loading entries...</p>
           </nav>
-        </aside>
+        </div>
+      </aside>
 
+      <main class="content-pane">
         <section id="latest" class="entries" aria-live="polite" aria-label="Blog entries">
           <p class="muted">Loading entries...</p>
         </section>
-      </div>
-    </main>
+      </main>
+    </div>
 
     <script src="script.js"></script>
   </body>
