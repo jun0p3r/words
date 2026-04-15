@@ -1,0 +1,16 @@
+[
+  {
+    "title": "First Light",
+    "date": "2026-04-14",
+    "summary": "A first note for the new blog.",
+    "file": "entries/2026-04-14-first-light.md",
+    "tags": ["journal", "photo"]
+  },
+  {
+    "title": "Keeping Small Notes",
+    "date": "2026-04-10",
+    "summary": "A quick example of headings, links, and lists.",
+    "file": "entries/2026-04-10-keeping-small-notes.md",
+    "tags": ["notes"]
+  }
+]
