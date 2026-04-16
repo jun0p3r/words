@@ -143,7 +143,6 @@ async function renderEntry(entry) {
           <time datetime="${escapeAttribute(entry.date)}">${formatDate(entry.date)}</time>
           ${tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
         </div>
-        ${entry.summary ? `<p class="entry-summary">${escapeHtml(entry.summary)}</p>` : ""}
       </header>
       <div class="entry-body">
         ${markdownToHtml(markdown, entry.file)}
